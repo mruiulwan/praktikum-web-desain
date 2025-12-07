@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fungsi dan Scope dalam JavaScript</title>
+  </head>
+  <body></body>
+  <script>
+    //Fungsi sederhana
+    function tambah(a, b) {
+      return a + b;
+    }
+
+    //Fungsi dengan parameter default
+    function greet(nama = "Pengguna") {
+      console.log("Halo," + nama + "!");
+    }
+
+    //Fungsi dengan fungsi di dalamnya
+    function outerFunction() {
+      let outerVar = "Variabel luar";
+      function innerFunction() {
+        let innerVar = "Variable dalam";
+        console.log(outerVar);
+        console.log(innerVar);
+      }
+      innerFunction();
+    }
+
+    console.log("hasil penjumlahan: " + tambah(5, 10));
+    greet();
+    outerFunction();
+
+    // post test 2
+    function kuadrat(angka) {
+      const result = angka * angka;
+      return result;
+
+      // return angka*angka
+    }
+    console.log(kuadrat(7));
+  </script>
+</html>
