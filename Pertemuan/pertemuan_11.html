@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p></p>
+    <button type="button">Tampil</button>
+    <button type="button">Hilang</button>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        jQuery("button:first").click(function () {
+          jQuery("p").text("Ini dari jQuery");
+        });
+
+        jQuery("button:last").click(function () {
+          jQuery("p").text("");
+        });
+      });
+    </script>
+  </body>
+</html>

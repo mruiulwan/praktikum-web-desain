@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="fI">
+        <table>
+            <tr>
+            <td>NIM</td>
+            <td>:</td>
+            <td><input type="text" name="nim" id=""></td>
+            </tr>
+            <tr>
+                <td>NAMA</td>
+                <td>:</td>
+                <td><input type="text" name="nama" id=""></td>
+            </tr>
+            <tr>
+                <td>KELAS</td>
+                <td>:</td>
+                <td>
+                <select name="kls" id="">
+                    <option value="SINFC-2024-01">SINFC-2024-01</option>
+                    <option value="SINFC-2024-02">SINFC-2024-02</option>
+                    <option value="SINFC-2024-03">SINFC-2024-03</option>
+                    <option value="SINFC-2024-04">SINFC-2024-04</option>
+                  </select>
+                </td>
+            </tr>
+            <tr>
+            <td></td>
+            <td></td>
+            <td><button type="button" onclick="simpan()">simpan</button></td>
+            <td><button type="button" onclick="Tampilkan()">Tampilkan</button></td>
+            </tr>
+        </table>
+        <br>
+        <table id="mhs" border="1">
+            <thead>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+            </thead>
+        </table>
+        
+    </from>
+
+    <script>
+        let data = [];
+        function simpan() {
+            data.push([document.fI.nim.value,document.fI.nama.value,document.fI.kls.value]);
+        }
+
+        function Tampilkan() {
+            let dt = document.getElementById("mhs");
+            dt.innerHTML = "";
+            for (let a = 0; a < data.length; a++) {
+                dt.innerHTML += "<tr><td>" + data[a][0] + "</td><td>" + data [a][1] + "</td><td>" + data[a][2] + "</td></tr>";
+            }
+        }
+    </script>
+</body>
+// nama nomor induk lama kerja, gaji pokok dari lama pekerja setiap 5 tahun naik 1 jt
+</html>

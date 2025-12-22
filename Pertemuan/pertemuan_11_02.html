@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        margin: 8px;
+        width: 40px;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <input type="text" /> <br />
+    <button type="button">1</button>
+    <button type="button">2</button>
+    <button type="button">3</button> <br />
+    <button type="button">4</button>
+    <button type="button">5</button>
+    <button type="button">6</button> <br />
+    <button type="button">7</button>
+    <button type="button">8</button>
+    <button type="button">9</button> <br />
+    <button type="button">+</button>
+    <button type="button">0</button>
+    <button type="button">-</button> <br />
+    <button type="button">*</button>
+    <button type="button">=</button>
+    <button type="button">/</button>
+  </body>
+  <script>
+    $(document).ready(function () {
+      let angka1 = "";
+      let operator = "";
+      let angka2 = "";
+
+      $("button").click(function () {
+        let nilai = $(this).text();
+
+        if ($.isNumeric(nilai)) {
+          if (operator === "") {
+            angka1 += nilai;
+            $("input").val(angka1);
+          } else {
+            angka2 += nilai;
+            $("input").val(angka2);
+          }
+          return;
+        }
+
+        if (nilai === "+" || nilai === "-" || nilai === "*" || nilai === "/") {
+          operator = nilai;
+          return;
+        }
+
+        if (nilai === "=") {
+          let hasil = 0;
+
+          let a = parseFloat(angka1);
+          let b = parseFloat(angka2);
+
+          if (operator === "+") hasil = a + b;
+          if (operator === "-") hasil = a - b;
+          if (operator === "*") hasil = a * b;
+          if (operator === "/") hasil = a / b;
+
+          $("input").val(hasil);
+
+          angka1 = hasil.toString();
+          angka2 = "";
+          operator = "";
+        }
+      });
+    });
+  </script>
+</html>
