@@ -32,6 +32,16 @@
     greet();
     outerFunction();
 
+    //scope
+    let globalVar = "Variable global";
+    function checkScope() {
+      let localVar = "Variable lokal";
+      console.log(globalVar); //Akses variable global
+      console.log(localVar);
+    }
+
+    checkScope();
+
     // post test 2
     function kuadrat(angka) {
       const result = angka * angka;
