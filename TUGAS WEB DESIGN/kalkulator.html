@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Kalkulator Modern</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #f1f3f6;
+        --calc: #fff;
+        --btn: #e5e7eb;
+        --text: #111;
+        --accent: #ff9800;
+      }
+      .dark {
+        --bg: #0f172a;
+        --calc: #1e293b;
+        --btn: #334155;
+        --text: #fff;
+        --accent: #22c55e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Poppins, sans-serif;
+        background: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        display: flex;
+        gap: 15px;
+      }
+      .calculator {
+        width: 360px;
+        background: var(--calc);
+        padding: 20px;
+        border-radius: 22px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+      .history {
+        width: 220px;
+        background: var(--calc);
+        border-radius: 22px;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+      }
+      .history h3 {
+        margin: 0 0 10px;
+        color: var(--text);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .history-list {
+        flex: 1;
+        overflow-y: auto;
+        font-size: 14px;
+        color: var(--text);
+      }
+      .history-item {
+        padding: 8px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .history-item:hover {
+        background: var(--btn);
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+      .menu span {
+        cursor: pointer;
+        margin-left: 10px;
+      }
+
+      #display {
+        width: 100%;
+        height: 70px;
+        font-size: 28px;
+        text-align: right;
+        padding: 15px;
+        border-radius: 15px;
+        border: none;
+        background: var(--btn);
+        color: var(--text);
+        margin-bottom: 15px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      button {
+        height: 58px;
+        border: none;
+        border-radius: 16px;
+        font-size: 17px;
+        background: var(--btn);
+        color: var(--text);
+        cursor: pointer;
+        transition: 0.15s;
+      }
+      button:active {
+        transform: scale(0.92);
+      }
+      .func {
+        background: #64748b;
+        color: #fff;
+      }
+      .op {
+        background: var(--accent);
+        color: #fff;
+      }
+      .ac {
+        background: #ef4444;
+        color: #fff;
+      }
+      .del {
+        background: #f97316;
+        color: #fff;
+      }
+      .equal {
+        background: #22c55e;
+        color: #fff;
+        grid-column: span 4;
+      }
+      .scientific {
+        display: none;
+      }
+      .show .scientific {
+        display: grid;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- CALCULATOR -->
+      <div class="calculator" id="calc">
+        <div class="top">
+          <strong id="mode">Basic</strong>
+          <div class="menu">
+            <span class="material-icons" onclick="toggleSci()">functions</span>
+            <span class="material-icons" onclick="toggleDark()">dark_mode</span>
+          </div>
+        </div>
+
+        <input id="display" disabled placeholder="0" />
+
+        <!-- SCIENTIFIC -->
+        <div class="grid scientific">
+          <button class="func" onclick="append('Math.sin(')">sin</button>
+          <button class="func" onclick="append('Math.cos(')">cos</button>
+          <button class="func" onclick="append('Math.tan(')">tan</button>
+          <button class="func" onclick="append('Math.log10(')">log</button>
+
+          <button class="func" onclick="append('Math.PI')">π</button>
+          <button class="func" onclick="append('Math.E')">e</button>
+          <button class="func" onclick="append('**')">xʸ</button>
+          <button class="func" onclick="square()">x²</button>
+        </div>
+
+        <!-- FUNCTION -->
+        <div class="grid">
+          <button class="ac" onclick="clearAll()">AC</button>
+          <button class="del" onclick="del()">DEL</button>
+          <button class="func" onclick="percent()">%</button>
+          <button class="func" onclick="toggleSign()">±</button>
+        </div>
+
+        <!-- NUMBERS -->
+        <div class="grid">
+          <button onclick="append('7')">7</button>
+          <button onclick="append('8')">8</button>
+          <button onclick="append('9')">9</button>
+          <button class="op" onclick="append('/')">÷</button>
+
+          <button onclick="append('4')">4</button>
+          <button onclick="append('5')">5</button>
+          <button onclick="append('6')">6</button>
+          <button class="op" onclick="append('*')">×</button>
+
+          <button onclick="append('1')">1</button>
+          <button onclick="append('2')">2</button>
+          <button onclick="append('3')">3</button>
+          <button class="op" onclick="append('-')">−</button>
+
+          <button class="func" onclick="inverse()">1/x</button>
+          <button onclick="append('0')">0</button>
+          <button onclick="append('.')">.</button>
+          <button class="op" onclick="append('+')">+</button>
+        </div>
+
+        <div class="grid">
+          <button class="equal" onclick="calculate()">=</button>
+        </div>
+      </div>
+
+      <!-- HISTORY -->
+      <div class="history">
+        <h3>
+          History
+          <span class="material-icons" onclick="clearHistory()">delete</span>
+        </h3>
+        <div class="history-list" id="history"></div>
+      </div>
+    </div>
+
+    <script>
+      const d = document.getElementById("display");
+      const c = document.getElementById("calc");
+      const h = document.getElementById("history");
+      const m = document.getElementById("mode");
+
+      const append = (v) => (d.value += v);
+      const clearAll = () => (d.value = "");
+      const del = () => (d.value = d.value.slice(0, -1));
+
+      function calculate() {
+        try {
+          const exp = d.value;
+          const res = eval(exp);
+          d.value = res;
+          addHistory(exp, res);
+        } catch {
+          d.value = "Error";
+        }
+      }
+
+      function square() {
+        if (d.value) d.value = Math.pow(+d.value, 2);
+      }
+      function inverse() {
+        let v = +d.value;
+        d.value = v === 0 ? "Error" : 1 / v;
+      }
+      function percent() {
+        if (d.value) d.value = +d.value / 100;
+      }
+      function toggleSign() {
+        if (d.value) d.value *= -1;
+      }
+
+      function toggleDark() {
+        document.body.classList.toggle("dark");
+      }
+
+      function toggleSci() {
+        c.classList.toggle("show");
+        m.innerText = c.classList.contains("show") ? "Scientific" : "Basic";
+      }
+
+      // HISTORY
+      function addHistory(exp, res) {
+        const item = document.createElement("div");
+        item.className = "history-item";
+        item.textContent = `${exp} = ${res}`;
+        item.onclick = () => (d.value = res);
+        h.prepend(item);
+      }
+      function clearHistory() {
+        h.innerHTML = "";
+      }
+    </script>
+  </body>
+</html>

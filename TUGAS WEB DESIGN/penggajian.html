@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Program Penggajian</title>
+  </head>
+  <body>
+    <h2>Program Penggajian</h2>
+
+    <label>Nomor Induk</label><br />
+    <input type="text" id="nik" /><br /><br />
+
+    <label>Nama</label><br />
+    <input type="text" id="nama" /><br /><br />
+
+    <label>Lama Kerja (Tahun)</label><br />
+    <input type="number" id="lamaKerja" /><br /><br />
+
+    <label>Golongan</label><br />
+    <select id="golongan">
+      <option value="2A">2A</option>
+      <option value="2B">2B</option>
+      <option value="3A">3A</option>
+      <option value="3B">3B</option></select
+    ><br /><br />
+
+    <button onclick="hitungGaji()">Hitung Gaji</button>
+
+    <h3>Hasil</h3>
+    <p id="hasil"></p>
+    <script>
+      function hitungGaji() {
+        var nik = document.getElementById("nik").value;
+        var nama = document.getElementById("nama").value;
+        var lamaKerja = parseInt(document.getElementById("lamaKerja").value);
+        var golongan = document.getElementById("golongan").value;
+        var gajiPokok = 0;
+        if (golongan === "2A") {
+          gajiPokok = 1000000;
+        } else if (golongan === "2B") {
+          gajiPokok = 1500000;
+        } else if (golongan === "3A") {
+          gajiPokok = 2000000;
+        } else if (golongan === "3B") {
+          gajiPokok = 2500000;
+        }
+        var kenaikan = Math.floor(lamaKerja / 5) * 1000000;
+        var totalGaji = gajiPokok + kenaikan;
+        document.getElementById("hasil").innerHTML =
+          "Nomor Induk: " +
+          nik +
+          "<br>" +
+          "Nama: " +
+          nama +
+          "<br>" +
+          "Golongan: " +
+          golongan +
+          "<br>" +
+          "Lama Kerja: " +
+          lamaKerja +
+          " Tahun<br>" +
+          "Gaji Pokok: Rp " +
+          gajiPokok +
+          "<br>" +
+          "Kenaikan: Rp " +
+          kenaikan +
+          "<br>" +
+          "Total Gaji: Rp " +
+          totalGaji;
+      }
+    </script>
+  </body>
+</html>
