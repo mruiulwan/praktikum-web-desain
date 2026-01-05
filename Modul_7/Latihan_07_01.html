@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buku Tamu CRUD</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Buku Tamu</h2>
+
+      <!--Table to Display-->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Kode</th>
+            <th>Nama</th>
+            <th>Email</th>
+            <th>Pesan</th>
+            <!--<th>Actions</th>-->
+          </tr>
+        </thead>
+        <tbody id="guestTableBody">
+          <!-- Guest rows will be appended here -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        const script_url =
+          "https://script.google.com/a/macros/uniku.ac.id/s/AKfycbzDoT-W8jprtjmq4v8_D_S0__pzcrjgzOCf7SNoyRqv4GVuQNeqr7tY9ry99T0t28Tf0g/exec";
+
+        //Load guest on page load
+        loadGuests();
+        //Load guests into the table
+        function loadGuests() {
+          $.ajax({
+            url: script_url,
+            type: "GET",
+            data: { action: "read" },
+            dataType: "json",
+            success: function (response) {
+              const tbody = $("#guestTableBody");
+              tbody.empty(); // Clear existing rows
+
+              response.forEach((guest) => {
+                tbody.append(`<tr>
+                     <td>${guest.kode}</td>
+                     <td>${guest.nama}</td>
+                     <td>${guest.email}</td>
+                     <td>${guest.pesan}</td>
+                     </tr>
+                     `);
+              });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error("Error loading guests:", textStatus, errorThrown);
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
