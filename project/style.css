@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 60px;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #333;
+}
+
+.btn-nav {
+  background: #b40000;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+}
+
+/* HERO */
+.hero {
+  height: 350px;
+  background: url("assets/hero.jpg") center/cover;
+  position: relative;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.55);
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 60px;
+}
+
+/* CONTENT */
+.content {
+  padding: 50px 60px;
+}
+
+/* BERITA */
+.berita {
+  background: #f4f4f4;
+  padding: 50px 60px;
+}
+
+.berita-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 5px;
+}
+
+/* FORM */
+.form-section {
+  max-width: 600px;
+  margin: 50px auto;
+}
+
+.form-aspirasi input,
+.form-aspirasi textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.form-aspirasi button {
+  width: 100%;
+  background: #b40000;
+  color: white;
+  border: none;
+  padding: 12px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 15px;
+  background: #eee;
+}
